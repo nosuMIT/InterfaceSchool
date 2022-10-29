@@ -51,8 +51,10 @@ namespace InterfaceSchool
             //Console.WriteLine(school.Count(x => x.Contains("Багаев")));
 
             //school.Sort();
-         
-            school.Sort(x => x >= 1);
+            school.Sort(new StageComparer());
+            Console.WriteLine(school);
+            school.Sort(new NameComparer());
+            //school.Sort(x => x >= 1);
             Console.WriteLine(school);
 
         }

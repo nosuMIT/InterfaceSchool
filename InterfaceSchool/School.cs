@@ -11,7 +11,7 @@ namespace InterfaceSchool
         Secondary,
         Higher
     }
-    internal class Student
+    public class Student : IComparable<Student>
     {
         static Random rnd = new Random();
         static string[] levelStages = { "младшая", "средняя", "старшая" };
@@ -96,8 +96,16 @@ namespace InterfaceSchool
             else
                 throw new Exception("Bad grade for pass");
         }
+
+        public int CompareTo(Student other)
+        {
+            if (this.grade != other.grade)
+                return this.FIO.CompareTo(other.FIO);
+            else
+                return this.grade.CompareTo(other.grade);
+        }
     }
-    class School
+    public class School
     {
         public string NameSchool { set; get; }
         List<Student> listStudents = new List<Student>();
@@ -157,27 +165,54 @@ namespace InterfaceSchool
             return count;
         }
 
-        public void Sort()
+        //public void Sort()
+        //{
+        //    listStudents.Sort((x, y) => (x.FIO.CompareTo(y.FIO)));
+        //}
+        //public void Sort()
+        //{
+        //    listStudents.Sort();
+        //}
+        //public void Sort(Func<int, bool> f)
+        //{
+        //    listStudents.Sort((x, y) =>
+        //    {
+
+        //        if (f(x.Grade) && f(y.Grade))
+        //        {
+        //            if (x.Grade != y.Grade)
+        //                return x.Grade.CompareTo(y.Grade);
+        //            else
+        //                return x.FIO.CompareTo(y.FIO);
+        //        }
+        //        else
+        //            return -1;
+        //    });
+        //}
+        public void Sort(IComparer<Student> comparer)
         {
-            listStudents.Sort((x, y) => (x.FIO.CompareTo(y.FIO)));
+            listStudents.Sort(comparer);       
         }
-        public void Sort(Func<int, bool> f)
-        {
-            listStudents.Sort((x, y) =>
-            {
-
-                if (f(x.Grade) && f(y.Grade))
-                {
-                    if (x.Grade != y.Grade)
-                        return x.Grade.CompareTo(y.Grade);
-                    else
-                        return x.FIO.CompareTo(y.FIO);
-                }
-                else
-                    return -1;
-            });
-        }
-
-
     }
+    public class StageComparer : IComparer<Student>
+    {
+        public int Compare(Student x, Student y)
+        {
+            if (x.Stage == y.Stage)
+                if (x.Performance == y.Performance)
+                    return x.FIO.CompareTo(y.FIO);
+                else
+                    return x.Performance.CompareTo(y.Performance);
+            else
+                return x.Stage.CompareTo(y.Stage);
+        }
+    }
+    public class NameComparer : IComparer<Student>
+    {
+        public int Compare(Student x, Student y)
+        {
+            return x.FIO.CompareTo(y.FIO);
+        }
+    }
+
 }
