@@ -28,15 +28,15 @@ namespace InterfaceSchool
             Student studA = new Student();
             Student studB = new Student();
             Student studBagaev = new Student("Багаев Аслан", 4, 4);
-            Student studAbaev = new Student("Абаев Георгий", 7, 3.4);
-            Student studAtaev = new Student("Атаев Сослан", 5, 3);
-            Console.WriteLine(studA);
-            Console.WriteLine(studB);
-            Console.WriteLine(studAbaev);
-            Console.WriteLine(studBagaev);
-            Console.WriteLine(studAtaev);
-            studBagaev.Pass();
-            Console.WriteLine(studBagaev);
+            Student studAbaev = new Student("Абаев Георгий", 4, 3.4);
+            Student studAtaev = new Student("Атаев Сослан", 4, 3);
+            //Console.WriteLine(studA);
+            //Console.WriteLine(studB);
+            //Console.WriteLine(studAbaev);
+            //Console.WriteLine(studBagaev);
+            //Console.WriteLine(studAtaev);
+            //studBagaev.Pass();
+            //Console.WriteLine(studBagaev);
            
             School school = new School("ФизМат");
             school.Add(studB);
@@ -45,14 +45,14 @@ namespace InterfaceSchool
             school.Add(studA);
             school.Add(studAtaev);
             Console.WriteLine(school);
-            Console.WriteLine(school.Count(x => x > 1));
-            Console.WriteLine(school.Count(x => x == Stages.ELelementary));
-            Console.WriteLine(school.Count((x, y) => (x >= 3.0 && x <= 5 && y == 1)));
-            Console.WriteLine(school.Count(x => x.Contains("Багаев")));
+            //Console.WriteLine(school.Count(x => x > 1));
+            //Console.WriteLine(school.Count(x => x == Stages.ELelementary));
+            //Console.WriteLine(school.Count((x, y) => (x >= 3.0 && x <= 5 && y == 1)));
+            //Console.WriteLine(school.Count(x => x.Contains("Багаев")));
 
             //school.Sort();
-            //Console.WriteLine(school);
-            school.Sort(x => x == 1);
+         
+            school.Sort(x => x >= 1);
             Console.WriteLine(school);
 
         }

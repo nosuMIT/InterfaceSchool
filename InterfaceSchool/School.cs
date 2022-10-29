@@ -13,6 +13,7 @@ namespace InterfaceSchool
     }
     internal class Student
     {
+        static Random rnd = new Random();
         static string[] levelStages = { "младшая", "средняя", "старшая" };
         static int[] levelStagesToGrage = { 4, 8, 11 };
         static string generateName = "A";
@@ -67,9 +68,11 @@ namespace InterfaceSchool
         {
             FIO = generateName;
             generateName = Convert.ToString(Convert.ToChar(Convert.ToInt32(generateName[0])+ 1));
-            grade = 1;
-            Performance = 5;
-            stage = Stages.ELelementary;
+            Grade = rnd.Next(1, 11);
+            Performance = Math.Round(rnd.NextDouble() * 5, 1);
+            //grade = 1;
+            //Performance = 5;
+            //stage = Stages.ELelementary;
         }
 
         public Student(string name, int grade, double performance)
@@ -160,15 +163,18 @@ namespace InterfaceSchool
         }
         public void Sort(Func<int, bool> f)
         {
-            listStudents.Sort(delegate (Student x, Student y)
+            listStudents.Sort((x, y) =>
             {
 
                 if (f(x.Grade) && f(y.Grade))
-                    return x.FIO.CompareTo(y.FIO);
+                {
+                    if (x.Grade != y.Grade)
+                        return x.Grade.CompareTo(y.Grade);
+                    else
+                        return x.FIO.CompareTo(y.FIO);
+                }
                 else
                     return -1;
-                    //return x.Grade.CompareTo(y.Grade);
-
             });
         }
 
